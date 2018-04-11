@@ -1,0 +1,2 @@
+バージョン
+macOS High Sierra 10.13.3

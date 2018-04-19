@@ -27,13 +27,15 @@ public class method extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    void myprofile(PrintWriter pw){
+     
+        void myprofile(PrintWriter pw){
         pw.print("私の名前は大西です<br>");
-        pw.print("好きな音楽はEDMとクラシックです<br>");
-        pw.print("趣味は音楽鑑賞です<br>");
-    
-    
+        pw.print("生年月日は1996年7月7日です<br>");
+        pw.print("長所は明るく前向きなところです！！<br>");
+
     }
+    
+    
     
     
     
@@ -43,8 +45,9 @@ public class method extends HttpServlet {
         
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
+            for(int i=0;i<10;i++){
             myprofile(out);
-            
+            }
             
             
             

@@ -26,6 +26,16 @@ public class hikisu2 extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+    void hikisu2(int num, int num2, boolean bl, PrintWriter pw) {
+        //第一引数と第二引数を掛け算し，第三引数の値が true であるときに掛け算の結果をさらに２乗
+        pw.println(num * num2);
+        
+        if (bl = true) {
+            pw.print((num * num2) * (num * num2));
+        }
+
+    }
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -34,10 +44,10 @@ public class hikisu2 extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet RensyuHikisu</title>");            
+            out.println("<title>Servlet RensyuHikisu</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet RensyuHikisu at " + request.getContextPath() + "</h1>");
+            hikisu2(5, 6, true, out);
             out.println("</body>");
             out.println("</html>");
         }

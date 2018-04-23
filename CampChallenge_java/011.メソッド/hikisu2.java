@@ -29,11 +29,15 @@ public class hikisu2 extends HttpServlet {
     void hikisu2(int num, int num2, boolean bl, PrintWriter pw) {
         //第一引数と第二引数を掛け算し，第三引数の値が true であるときに掛け算の結果をさらに２乗
         pw.println(num * num2);
-        
+
         if (bl = true) {
             pw.print((num * num2) * (num * num2));
         }
 
+    }
+
+    void hikisu2(PrintWriter pw) {
+        hikisu2(5, 3, false, pw);
     }
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
@@ -47,7 +51,7 @@ public class hikisu2 extends HttpServlet {
             out.println("<title>Servlet RensyuHikisu</title>");
             out.println("</head>");
             out.println("<body>");
-            hikisu2(5, 6, true, out);
+            hikisu2(out);
             out.println("</body>");
             out.println("</html>");
         }

@@ -49,9 +49,11 @@ public class modoriti2 extends HttpServlet {
             out.println("<title>Servlet modoriti2</title>");            
             out.println("</head>");
             out.println("<body>");
+            
             String[] data=profile();
-            for(int i=0;i<3;i++)
+            for(int i=1;i<3;i++)
                 out.println(data[i]+"<br>");
+            
             out.println("</body>");
             out.println("</html>");
         }

@@ -16,16 +16,6 @@ import javax.servlet.http.HttpSession;
  * @author hayashi-s
  */
 public class InsertResult extends HttpServlet {
-
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
@@ -37,6 +27,9 @@ public class InsertResult extends HttpServlet {
             UserDataDTO userdata = new UserDataDTO();
             userdata.setName((String)session.getAttribute("name"));
             Calendar birthday = Calendar.getInstance();
+            birthday.set(Integer.valueOf((String)session.getAttribute("year")),
+                        (Integer.valueOf((String)session.getAttribute("month")))-1,
+                        Integer.valueOf((String)session.getAttribute("day")));
             userdata.setBirthday(birthday.getTime());
             userdata.setType(Integer.parseInt((String)session.getAttribute("type")));
             userdata.setTell((String)session.getAttribute("tell"));

@@ -6,24 +6,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
 /**
  * insertconfirm.jspと対応するサーブレット
  * フォーム入力された情報はここでセッションに格納し、以降持ちまわることになる
  * 直接アクセスした場合はerror.jspに振り分け
- * @author hayashi-s
  */
 public class InsertConfirm extends HttpServlet {
-
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try{
@@ -33,6 +21,9 @@ public class InsertConfirm extends HttpServlet {
             if(accesschk ==null || (Integer)session.getAttribute("ac")!=Integer.parseInt(accesschk)){
                 throw new Exception("不正なアクセスです");
             }
+           
+            HttpSession hs = request.getSession();
+            UserDataBeans jb = new UserDataBeans();
             
             //フォームからの入力を取得
             String name = request.getParameter("name");
@@ -43,17 +34,30 @@ public class InsertConfirm extends HttpServlet {
             String tell = request.getParameter("tell");
             String comment = request.getParameter("comment");
 
+            //UserDataBeansに格納
+            jb.setName(name);
+            jb.setYear(year);
+            jb.setMonth(month);
+            jb.setDay(day);
+            jb.setType(type);
+            jb.setTell(tell);
+            jb.setComment(comment);
+            
             //セッションに格納
-            session.setAttribute("name", name);
-            session.setAttribute("year", year);
-            session.setAttribute("month",month);
-            session.setAttribute("day", day);
-            session.setAttribute("type", type);
-            session.setAttribute("tell", tell);
-            session.setAttribute("comment", comment);
-            System.out.println("Session updated!!");
+            hs.setAttribute("JB", jb);
+            
+            //クラスをまたいで利用するためセッションに保存する
+            session.setAttribute("name", jb.getName());
+            session.setAttribute("year", jb.getYear());
+            session.setAttribute("month", jb.getMonth());
+            session.setAttribute("day", jb.getDay());
+            session.setAttribute("type", jb.getType());
+            session.setAttribute("tell", jb.getTell());
+            session.setAttribute("comment", jb.getComment());
+            session.setAttribute("DATA", jb);
             
             request.getRequestDispatcher("/insertconfirm.jsp").forward(request, response);
+            
         }catch(Exception e){
             request.setAttribute("error", e.getMessage());
             request.getRequestDispatcher("/error.jsp").forward(request, response);
